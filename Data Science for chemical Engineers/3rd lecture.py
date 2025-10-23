@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+
+data = {'Name': ['Aishwarya', 'Bhushan', 'Chetan', 'Dhananjay', 'Eknath', 'Faiz', 'Ganesh', None],
+        'Age': [25, 30, np.nan, 40, 45, 50, None, 28],
+        'City': ['Surat', 'Mumbai', 'Pune', 'Nagpur', 'Chennai', None, 'Kolkata', 'Delhi'],
+        'Status': ['Y', 'N', 'Y', 'N', 'Y', 'Y', 'N', 'Y']}
+
+df = pd.DataFrame(data)
+
+print("Original DataFrame:\n", df)
+
+# Detect missing values
+print("\nMissing values:\n", df.isnull().sum())
+
+# Fill missing values
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+df['City'] = df['City'].fillna('Unknown')
+df['Name'] = df['Name'].fillna('Anonymous')
+#print(df)
+
+# Replace specific values
+df['Status']=df['Status'].replace({'Y': 'Yes', 'N': 'No'})
+#print(df)
+
+
+# Rename columns
+df=df.rename(columns={'Name': 'FullName', 'City': 'Location'})
+#print(df)
+
+# Change datatype
+df['Age'] = df['Age'].astype(int)
+print(df)
+
+# Remove duplicates
+df=df.drop_duplicates()
+print(df)
+
+# Sort values
+#df=df.sort_values(by='Age', ascending=False)
+
+#print("\nCleaned DataFrame:\n", df)
